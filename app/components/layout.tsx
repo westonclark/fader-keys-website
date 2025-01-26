@@ -10,14 +10,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Logo />
           <nav className="flex items-center space-x-6">
-            <Link href="#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="#about" className="text-md text-muted-foreground hover:text-foreground transition-colors">
               About
             </Link>
-            <Link href="#setup" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="#setup" className="text-md text-muted-foreground hover:text-foreground transition-colors">
               Setup
             </Link>
             <form action={createCheckoutSession}>
-              <Button type="submit" variant="outline" size="sm" className="border-white/10 hover:border-white/20">
+              <Button type="submit" variant="outline" size="sm" className="hidden md:flex border-white/10 hover:border-white/20">
                 Download
               </Button>
             </form>

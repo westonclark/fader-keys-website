@@ -18,10 +18,10 @@ export default function Home({ searchParams }: { searchParams: { success?: strin
       {/* Hero Section - Trae-inspired */}
       <section className="relative min-h-[80vh] flex items-center justify-center">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-7xl font-bold mb-6 bg-gradient-to-r from-rose-200 to-rose-300 bg-clip-text text-transparent">
+          <h1 className="md:text-7xl text-6xl font-bold mb-6 bg-gradient-to-r from-rose-200 to-rose-300 bg-clip-text text-transparent">
             Fader Keys
           </h1>
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="md:text-xl text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
           Control your DAW faders with just a computer keyboard
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
