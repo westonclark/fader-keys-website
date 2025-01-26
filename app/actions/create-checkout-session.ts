@@ -17,7 +17,7 @@ export async function createCheckoutSession() {
           product_data: {
             name: "Fader Keys Software",
           },
-          unit_amount: 2000, // $20.00
+          unit_amount: 2499, // $24.99
         },
         quantity: 1,
       },
