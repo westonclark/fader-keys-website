@@ -9,7 +9,7 @@ export function HeroSection() {
           Fader Keys
         </h1>
         <p className="md:text-xl text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Control DAW faders with just a computer keyboard
+          Control your DAW faders using just a computer keyboard
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <form action={createCheckoutSession}>
