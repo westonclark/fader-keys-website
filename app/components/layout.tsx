@@ -16,8 +16,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <Link href="#setup" className="text-md text-muted-foreground hover:text-foreground transition-colors">
               Setup
             </Link>
-            <form action={createCheckoutSession}>
-              <Button type="submit" variant="outline" size="sm" className="hidden md:flex border-white/10 hover:border-white/20">
+            <form action={createCheckoutSession} className="hidden md:flex">
+              <Button type="submit" variant="outline" size="sm" className="border-white/10 hover:border-white/20">
                 Download
               </Button>
             </form>
