@@ -1,11 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "../components/ui/button";
-import { createCheckoutSession } from "../actions/create-checkout-session";
 import { Sliders } from "lucide-react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { MobileMenu } from "./mobile-menu";
 
 export function Navbar() {
   return (
@@ -16,20 +13,7 @@ export function Navbar() {
           <span className="font-bold text-lg md:text-xl">Fader Keys</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-4">
-          <Link
-            href="#about"
-            className="px-3 py-2 text-md text-muted-foreground hover:text-foreground transition-colors"
-          >
-            About
-          </Link>
-          <Link
-            href="#setup"
-            className="px-3 py-2 text-md text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Setup
-          </Link>
+        <nav className="flex items-center gap-4">
           <SignedOut>
             <SignInButton mode="modal">
               <span className="px-3 py-2 text-md text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
@@ -38,14 +22,9 @@ export function Navbar() {
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <UserButton afterSignOutUrl="/" userProfileUrl="/dashboard" />
+            <UserButton userProfileUrl="/dashboard" />
           </SignedIn>
         </nav>
-
-        {/* Mobile Navigation */}
-        <div className="md:hidden">
-          <MobileMenu />
-        </div>
       </div>
     </header>
   );
