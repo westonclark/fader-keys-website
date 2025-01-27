@@ -44,6 +44,28 @@ export function AboutSection() {
               />
             </div>
           </div>
+
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold mb-6">
+              Officially Supported DAWs
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {[
+                "Pro Tools",
+                "Logic Pro X",
+                "Ableton Live",
+                "Reaper",
+                "Cubase",
+                "Studio One",
+                "Luna",
+              ].map((daw) => (
+                <div key={daw} className="flex items-center gap-2">
+                  <div className="text-primary">✦</div>
+                  <span className="text-muted-foreground">{daw}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
