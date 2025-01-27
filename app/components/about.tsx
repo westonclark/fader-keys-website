@@ -4,7 +4,7 @@ export function AboutSection() {
   return (
     <section id="about" className="py-24 border-t border-white/10">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl font-bold mb-6">What is Fader Keys?</h2>
