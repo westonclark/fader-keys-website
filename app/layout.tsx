@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Fader Keys",
@@ -28,7 +29,10 @@ export default function RootLayout({
       }}
     >
       <html lang="en" suppressHydrationWarning>
-        <body className="bg-background text-foreground">{children}</body>
+        <body className="bg-background text-foreground">
+          <Toaster />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
