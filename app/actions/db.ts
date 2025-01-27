@@ -35,3 +35,13 @@ export async function upsertUser({
     RETURNING *;
   `;
 }
+
+export async function getUserProducts(userId: string) {
+  const sql = neon(process.env.DATABASE_URL!);
+
+  return await sql`
+    SELECT * FROM users
+    WHERE auth_id = ${userId}
+    ORDER BY created_date DESC
+  `;
+}

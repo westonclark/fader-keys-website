@@ -23,8 +23,8 @@ export async function createCheckoutSession() {
       },
     ],
     mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/?canceled=true`,
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,
+    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
   });
 
   redirect(session.url!);

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { createCheckoutSession } from "@/app/actions/create-checkout-session";
 
 export function HeroSection() {
