@@ -33,11 +33,6 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         baseTheme: dark,
-        elements: {
-          card: "bg-background",
-          navbar: "bg-background",
-          footer: "bg-background",
-        },
       }}
     >
       <html lang="en" suppressHydrationWarning>
