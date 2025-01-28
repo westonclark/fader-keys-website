@@ -45,3 +45,24 @@ export async function getUserProducts(userId: string) {
     ORDER BY created_date DESC
   `;
 }
+
+export async function deleteUser(auth_id: string) {
+  const sql = neon(process.env.DATABASE_URL!);
+
+  try {
+    console.log("Attempting to delete user:", auth_id);
+    const result = await sql`
+      DELETE FROM users
+      WHERE auth_id = ${auth_id}
+    `;
+    console.log("Delete result:", result);
+    return result;
+  } catch (err) {
+    console.error("Database error in deleteUser:", {
+      error: err,
+      auth_id,
+      timestamp: new Date().toISOString(),
+    });
+    throw err;
+  }
+}

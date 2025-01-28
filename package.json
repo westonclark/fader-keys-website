@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:webhooks": "ngrok http 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -58,6 +59,7 @@
     "recharts": "2.15.0",
     "sonner": "^1.7.1",
     "stripe": "latest",
+    "svix": "^1.45.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
