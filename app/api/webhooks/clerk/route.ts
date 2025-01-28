@@ -20,8 +20,6 @@ export async function POST(req: Request) {
     const payload = await req.json();
     const body = JSON.stringify(payload);
 
-    console.log("Received webhook payload:", payload);
-
     const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET || "");
     let evt: WebhookEvent;
 
@@ -48,18 +46,15 @@ export async function POST(req: Request) {
         const email = email_addresses[0]?.email_address;
         const name = [first_name, last_name].filter(Boolean).join(" ");
 
-        console.log("Processing user creation:", { id, email, name });
-
         if (email) {
           try {
             await upsertUser({
               auth_id: id,
               email,
               name: name || "",
-              order_number: "TRIAL",
-              serial_number: generateSerialNumber(),
+              order_number: "",
+              serial_number: "",
             });
-            console.log("User created successfully");
           } catch (err: any) {
             console.error("Error upserting user:", err);
             return new Response(
@@ -75,7 +70,6 @@ export async function POST(req: Request) {
 
       case "user.deleted": {
         const { id } = evt.data;
-        console.log("Processing user deletion:", { id });
 
         if (!id) {
           return new Response("Missing user ID", { status: 400 });
@@ -83,7 +77,6 @@ export async function POST(req: Request) {
 
         try {
           await deleteUser(id);
-          console.log("User deleted successfully");
         } catch (err: any) {
           console.error("Error deleting user:", err);
           return new Response(
