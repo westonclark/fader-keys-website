@@ -1,7 +1,13 @@
+"use client";
+
 import { Button } from "../components/ui/button";
 import { createCheckoutSession } from "@/app/actions/create-checkout-session";
+import { useAuth } from "@clerk/nextjs";
+import { SignInButton } from "@clerk/nextjs";
 
 export function HeroSection() {
+  const { isSignedIn } = useAuth();
+
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center">
       <div className="container mx-auto px-4 text-center">
@@ -12,15 +18,26 @@ export function HeroSection() {
           Control DAW faders using just your computer keyboard
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <form action={createCheckoutSession}>
-            <Button
-              type="submit"
-              size="lg"
-              className="min-w-[200px] bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white border-0"
-            >
-              Download for macOS — $24.99
-            </Button>
-          </form>
+          {isSignedIn ? (
+            <form action={createCheckoutSession}>
+              <Button
+                type="submit"
+                size="lg"
+                className="min-w-[200px] bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white border-0"
+              >
+                Download for macOS — $24.99
+              </Button>
+            </form>
+          ) : (
+            <SignInButton mode="modal">
+              <Button
+                size="lg"
+                className="min-w-[200px] bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white border-0"
+              >
+                Sign up to Download
+              </Button>
+            </SignInButton>
+          )}
         </div>
         <div className="mt-16 text-sm text-muted-foreground">
           <p className="mb-2">Supported Applications</p>

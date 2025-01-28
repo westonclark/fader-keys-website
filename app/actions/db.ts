@@ -14,24 +14,32 @@ export async function upsertUser({
   name,
   order_number,
   serial_number,
+  preserveFields = [],
 }: {
   auth_id: string;
   email: string;
   name: string;
   order_number: string;
   serial_number: string;
+  preserveFields?: string[];
 }) {
   const sql = neon(process.env.DATABASE_URL!);
 
   return await sql`
     INSERT INTO users (auth_id, email, name, order_number, serial_number)
     VALUES (${auth_id}, ${email}, ${name}, ${order_number}, ${serial_number})
-    ON CONFLICT (auth_id)
-    DO UPDATE SET
-      email = ${email},
-      name = ${name},
-      order_number = ${order_number},
-      serial_number = ${serial_number}
+    ON CONFLICT (auth_id) DO
+    UPDATE SET
+      email = CASE
+        WHEN ${preserveFields.includes("email")} THEN users.email
+        ELSE EXCLUDED.email
+      END,
+      name = CASE
+        WHEN ${preserveFields.includes("name")} THEN users.name
+        ELSE EXCLUDED.name
+      END,
+      order_number = EXCLUDED.order_number,
+      serial_number = EXCLUDED.serial_number
     RETURNING *;
   `;
 }

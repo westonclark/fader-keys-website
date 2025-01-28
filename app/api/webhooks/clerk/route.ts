@@ -2,7 +2,6 @@ import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { Webhook } from "svix";
 import { upsertUser, deleteUser } from "@/app/actions/db";
-import { generateSerialNumber } from "@/app/util/generate-serial";
 
 export async function POST(req: Request) {
   try {
