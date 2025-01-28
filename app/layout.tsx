@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: "Control your DAW faders with ease",
     images: [
       {
-        url: "/opengraph-imaage.png",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "Fader Keys - DAW Controller",
