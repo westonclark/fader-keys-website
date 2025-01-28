@@ -22,7 +22,17 @@ export function Navbar() {
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <UserButton userProfileUrl="/dashboard" />
+            <UserButton>
+              <UserButton.MenuItems>
+                <UserButton.Action label="manageAccount" />
+                <UserButton.Link
+                  label="My Products"
+                  href="/dashboard"
+                  labelIcon={<Sliders className="h-4 w-4" />}
+                />
+                <UserButton.Action label="signOut" />
+              </UserButton.MenuItems>
+            </UserButton>
           </SignedIn>
         </nav>
       </div>

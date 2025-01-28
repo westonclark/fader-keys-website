@@ -16,7 +16,7 @@ export default async function DashboardPage() {
       <Navbar />
       <div className="min-h-screen bg-background">
         <div className="container max-w-6xl mx-auto px-4 py-16">
-          <h1 className="text-3xl font-bold mb-8">Your Products</h1>
+          <h1 className="text-3xl font-bold mb-8">My Products</h1>
           <ProductList userId={userId} />
         </div>
       </div>

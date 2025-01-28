@@ -67,6 +67,34 @@ export async function POST(req: Request) {
         break;
       }
 
+      case "user.updated": {
+        const { id, email_addresses, first_name, last_name } = evt.data;
+        const email = email_addresses[0]?.email_address;
+        const name = [first_name, last_name].filter(Boolean).join(" ");
+
+        if (email) {
+          try {
+            await upsertUser({
+              auth_id: id,
+              email,
+              name: name || "",
+              order_number: "",
+              serial_number: "",
+              preserveFields: ["order_number", "serial_number"],
+            });
+          } catch (err: any) {
+            console.error("Error updating user:", err);
+            return new Response(
+              `Error updating user: ${err?.message || "Unknown error"}`,
+              {
+                status: 500,
+              }
+            );
+          }
+        }
+        break;
+      }
+
       case "user.deleted": {
         const { id } = evt.data;
 
