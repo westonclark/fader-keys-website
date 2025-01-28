@@ -9,7 +9,7 @@ export function HeroSection() {
   const { isSignedIn } = useAuth();
 
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center">
+    <section className="relative min-h-[90vh] flex items-center justify-center">
       <div className="container mx-auto px-4 text-center">
         <h1 className="md:text-7xl text-6xl font-bold mb-6 bg-gradient-to-r from-rose-200 to-rose-300 bg-clip-text text-transparent py-2">
           Fader Keys
@@ -25,7 +25,7 @@ export function HeroSection() {
                 size="lg"
                 className="min-w-[200px] bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white border-0"
               >
-                Download for macOS — $24.99
+                {"Download for macOS — $24.99"}
               </Button>
             </form>
           ) : (
@@ -34,7 +34,7 @@ export function HeroSection() {
                 size="lg"
                 className="min-w-[200px] bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white border-0"
               >
-                Sign up to Download
+                {"Download for macOS — $24.99"}
               </Button>
             </SignInButton>
           )}
