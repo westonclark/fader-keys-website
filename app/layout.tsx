@@ -10,6 +10,18 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  openGraph: {
+    title: "Fader Keys",
+    description: "Control your DAW faders with ease",
+    images: [
+      {
+        url: "/opengraph-imaage.png",
+        width: 1200,
+        height: 630,
+        alt: "Fader Keys - DAW Controller",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
