@@ -22,13 +22,13 @@ export async function POST(req: Request) {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session;
       const userId = session.client_reference_id;
-      const orderId = session.id;
+      const paymentIntentId = session.payment_intent as string;
 
       if (userId) {
         const serialNumber = generateSerialNumber();
         await upsertUser({
           auth_id: userId,
-          order_number: orderId,
+          order_number: paymentIntentId,
           serial_number: serialNumber,
           email: session.customer_details?.email || "",
           name: "",

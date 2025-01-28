@@ -26,9 +26,6 @@ export async function ProductList({ userId }: { userId: string }) {
           className="border-white/10 border shadow-md dark:shadow-black/10"
         >
           <CardHeader className="relative">
-            <div className="absolute top-4 right-6 text-xs text-muted-foreground/50">
-              Order #{product.order_number}
-            </div>
             <div className="flex flex-col gap-4">
               <CardTitle>Fader Keys</CardTitle>
               <div className="flex flex-col gap-3">
