@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:webhooks": "ngrok http 3000",
+    "dev:stripe": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
+    "dev:clerk": "ngrok http 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+
   "dependencies": {
     "@clerk/nextjs": "^6.10.2",
     "@clerk/themes": "^2.2.12",
