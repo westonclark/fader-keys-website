@@ -1,11 +1,12 @@
-"use server";
+import { getDbClient } from "./client";
 
-import { neon } from "@neondatabase/serverless";
-
-export async function getData() {
-  const sql = neon(process.env.DATABASE_URL!);
-  const data = await sql`...`;
-  return data;
+export async function getUserProducts(userId: string) {
+  const sql = getDbClient();
+  return await sql`
+    SELECT * FROM users
+    WHERE auth_id = ${userId}
+    ORDER BY created_date DESC
+  `;
 }
 
 export async function upsertUser({
@@ -23,8 +24,7 @@ export async function upsertUser({
   serial_number: string;
   preserveFields?: string[];
 }) {
-  const sql = neon(process.env.DATABASE_URL!);
-
+  const sql = getDbClient();
   return await sql`
     INSERT INTO users (auth_id, email, name, order_number, serial_number)
     VALUES (${auth_id}, ${email}, ${name}, ${order_number}, ${serial_number})
@@ -52,27 +52,13 @@ export async function upsertUser({
   `;
 }
 
-export async function getUserProducts(userId: string) {
-  const sql = neon(process.env.DATABASE_URL!);
-
-  return await sql`
-    SELECT * FROM users
-    WHERE auth_id = ${userId}
-    ORDER BY created_date DESC
-  `;
-}
-
 export async function deleteUser(auth_id: string) {
-  const sql = neon(process.env.DATABASE_URL!);
-
+  const sql = getDbClient();
   try {
-    console.log("Attempting to delete user:", auth_id);
-    const result = await sql`
+    return await sql`
       DELETE FROM users
       WHERE auth_id = ${auth_id}
     `;
-    console.log("Delete result:", result);
-    return result;
   } catch (err) {
     console.error("Database error in deleteUser:", {
       error: err,

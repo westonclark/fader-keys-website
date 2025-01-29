@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "../components/ui/button";
-import { createCheckoutSession } from "@/app/actions/create-checkout-session";
+import { Button } from "../ui/button";
+import { createCheckoutSession } from "@/app/actions/stripe/create-checkout-session";
 import { useAuth } from "@clerk/nextjs";
 import { SignInButton } from "@clerk/nextjs";
 

@@ -1,12 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import Stripe from "stripe";
+import { stripe } from "@/lib/stripe/client";
 import { auth } from "@clerk/nextjs/server";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-12-18.acacia",
-});
 
 export async function createCheckoutSession() {
   const { userId } = await auth();

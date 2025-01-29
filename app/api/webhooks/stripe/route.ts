@@ -1,8 +1,8 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { upsertUser } from "@/app/actions/db";
-import { generateSerialNumber } from "@/app/util/generate-serial";
+import { upsertUser } from "@/lib/db/users";
+import { generateSerialNumber } from "@/lib/utils/generate-serial";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-12-18.acacia",
