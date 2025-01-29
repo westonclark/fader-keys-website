@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { upsertUser } from "@/lib/db/users";
 import { generateSerialNumber } from "@/lib/utils/generate-serial";
+import { sendPurchaseConfirmation } from "@/lib/email/send-email";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-12-18.acacia",
@@ -26,13 +27,29 @@ export async function POST(req: Request) {
 
       if (userId) {
         const serialNumber = generateSerialNumber();
+        const email = session.customer_details?.email;
+
         await upsertUser({
           auth_id: userId,
           order_number: paymentIntentId,
           serial_number: serialNumber,
-          email: session.customer_details?.email || "",
+          email: "",
           name: "",
           preserveFields: ["name", "email"],
+        });
+
+        if (!email) {
+          console.error("No email found in checkout session");
+          return new Response("No email found in checkout session", {
+            status: 400,
+          });
+        }
+
+        // Send confirmation email to the email provided during checkout
+        await sendPurchaseConfirmation({
+          email,
+          orderNumber: paymentIntentId,
+          serialNumber,
         });
       }
     }

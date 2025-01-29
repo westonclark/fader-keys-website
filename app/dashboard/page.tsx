@@ -74,7 +74,7 @@ export async function ProductList({ userId }: { userId: string }) {
                     </div>
                   </div>
                   <a
-                    href="/Fader Keys v0.3.0.zip"
+                    href="/Fader Keys Installer.zip"
                     className="flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white text-sm font-medium transition-colors w-full sm:w-auto"
                   >
                     <Download className="h-4 w-4" />
