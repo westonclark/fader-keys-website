@@ -14,7 +14,6 @@ export async function POST(req: Request) {
 
     const sql = neon(process.env.DATABASE_URL!);
 
-    // Check if a user exists with this serial number
     const users = await sql`
       SELECT * FROM users
       WHERE serial_number = ${serialNumber}
