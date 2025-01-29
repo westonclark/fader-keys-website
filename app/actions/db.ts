@@ -38,8 +38,16 @@ export async function upsertUser({
         WHEN ${preserveFields.includes("name")} THEN users.name
         ELSE EXCLUDED.name
       END,
-      order_number = EXCLUDED.order_number,
-      serial_number = EXCLUDED.serial_number
+      order_number = CASE
+        WHEN ${preserveFields.includes("order_number")} THEN users.order_number
+        ELSE EXCLUDED.order_number
+      END,
+      serial_number = CASE
+        WHEN ${preserveFields.includes(
+          "serial_number"
+        )} THEN users.serial_number
+        ELSE EXCLUDED.serial_number
+      END
     RETURNING *;
   `;
 }
