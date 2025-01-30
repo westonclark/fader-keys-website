@@ -47,6 +47,10 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --gradient-start: 350 89% 60%;
+    --gradient-end: 338 71% 53%;
+    --gradient-text-start: 350 85% 75%;
+    --gradient-text-end: 338 85% 55%;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -70,6 +74,10 @@ body {
       --border: 0 0% 14.9%;
       --input: 0 0% 14.9%;
       --ring: 0 0% 83.1%;
+      --gradient-start: 350 89% 60%;
+      --gradient-end: 338 71% 53%;
+      --gradient-text-start: 350 85% 85%;
+      --gradient-text-end: 338 85% 80%;
     }
   }
 }

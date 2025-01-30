@@ -48,14 +48,14 @@ export async function ProductList({ userId }: { userId: string }) {
       {products.map((product) => (
         <Card
           key={product.id}
-          className="border-white/10 border bg-background relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_30px_-5px_rgba(244,114,182,0.2)]"
+          className="border-border/60 border bg-background relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_30px_-5px_rgba(244,114,182,0.3)] dark:border-white/10"
         >
           {/* Gradient background effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-rose-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           <CardHeader className="relative">
             <div className="flex flex-col gap-4">
-              <CardTitle className="text-2xl bg-gradient-to-r from-rose-200 to-rose-300 bg-clip-text text-transparent">
+              <CardTitle className="text-2xl bg-gradient-to-r from-[hsl(var(--gradient-text-start))] to-[hsl(var(--gradient-text-end))] bg-clip-text text-transparent">
                 Fader Keys
               </CardTitle>
               <div className="flex flex-col gap-4">

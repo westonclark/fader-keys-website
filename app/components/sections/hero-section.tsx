@@ -11,7 +11,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center">
       <div className="container mx-auto px-4 text-center">
-        <h1 className="md:text-7xl text-6xl font-bold mb-6 bg-gradient-to-r from-rose-200 to-rose-300 bg-clip-text text-transparent py-2">
+        <h1 className="md:text-7xl text-6xl font-bold mb-6 bg-gradient-to-r from-[hsl(var(--gradient-text-start))] to-[hsl(var(--gradient-text-end))] bg-clip-text text-transparent py-2">
           Fader Keys
         </h1>
         <p className="md:text-xl text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
