@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { upsertUser } from "@/lib/db/users";
+import { updateUserPurchase } from "@/lib/db/users";
 import { generateSerialNumber } from "@/lib/utils/generate-serial";
 import { sendPurchaseConfirmation } from "@/lib/email/send-email";
 
@@ -29,13 +29,10 @@ export async function POST(req: Request) {
         const serialNumber = generateSerialNumber();
         const email = session.customer_details?.email;
 
-        await upsertUser({
+        await updateUserPurchase({
           auth_id: userId,
           order_number: paymentIntentId,
           serial_number: serialNumber,
-          email: "",
-          name: "",
-          preserveFields: ["name", "email"],
         });
 
         if (!email) {

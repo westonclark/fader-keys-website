@@ -9,56 +9,96 @@ export async function getUserProducts(userId: string) {
   `;
 }
 
-export async function upsertUser({
+export async function createUserFromClerk({
   auth_id,
   email,
   name,
-  order_number,
-  serial_number,
-  preserveFields = [],
 }: {
   auth_id: string;
-  email: string;
-  name: string;
-  order_number: string;
-  serial_number: string;
-  preserveFields?: string[];
+  email: string | null;
+  name: string | null;
 }) {
   const sql = getDbClient();
-  return await sql`
-    INSERT INTO users (auth_id, email, name, order_number, serial_number)
-    VALUES (${auth_id}, ${email}, ${name}, ${order_number}, ${serial_number})
-    ON CONFLICT (auth_id) DO
-    UPDATE SET
-      email = CASE
-        WHEN ${preserveFields.includes("email")} THEN users.email
-        ELSE EXCLUDED.email
-      END,
-      name = CASE
-        WHEN ${preserveFields.includes("name")} THEN users.name
-        ELSE EXCLUDED.name
-      END,
-      order_number = CASE
-        WHEN ${preserveFields.includes("order_number")} THEN users.order_number
-        ELSE EXCLUDED.order_number
-      END,
-      serial_number = CASE
-        WHEN ${preserveFields.includes(
-          "serial_number"
-        )} THEN users.serial_number
-        ELSE EXCLUDED.serial_number
-      END
-    RETURNING *;
-  `;
+  try {
+    return await sql`
+        INSERT INTO users (auth_id, email, name)
+        VALUES (${auth_id}, ${email}, ${name})
+        RETURNING *
+      `;
+  } catch (err) {
+    console.error("Database error in createUserFromClerk:", {
+      error: err,
+      auth_id,
+      email,
+      name,
+      timestamp: new Date().toISOString(),
+    });
+    throw err;
+  }
+}
+
+export async function updateUserEmail({
+  auth_id,
+  email,
+}: {
+  auth_id: string;
+  email: string | null;
+}) {
+  const sql = getDbClient();
+  try {
+    return await sql`
+      UPDATE users
+      SET email = ${email}
+      WHERE auth_id = ${auth_id}
+      RETURNING *
+    `;
+  } catch (err) {
+    console.error("Database error in updateUserProfile:", {
+      error: err,
+      auth_id,
+      email,
+      timestamp: new Date().toISOString(),
+    });
+    throw err;
+  }
+}
+
+export async function updateUserPurchase({
+  auth_id,
+  order_number,
+  serial_number,
+}: {
+  auth_id: string;
+  order_number: string;
+  serial_number: string;
+}) {
+  const sql = getDbClient();
+  try {
+    return await sql`
+      UPDATE users
+      SET order_number = ${order_number}, serial_number = ${serial_number}
+      WHERE auth_id = ${auth_id}
+      RETURNING *
+    `;
+  } catch (err) {
+    console.error("Database error in updateUserPurchase:", {
+      error: err,
+      auth_id,
+      order_number,
+      serial_number,
+      timestamp: new Date().toISOString(),
+    });
+    throw err;
+  }
 }
 
 export async function deleteUser(auth_id: string) {
   const sql = getDbClient();
   try {
     return await sql`
-      DELETE FROM users
-      WHERE auth_id = ${auth_id}
-    `;
+        DELETE FROM users
+        WHERE auth_id = ${auth_id}
+      `;
   } catch (err) {
     console.error("Database error in deleteUser:", {
       error: err,

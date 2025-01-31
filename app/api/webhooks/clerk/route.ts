@@ -1,7 +1,11 @@
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { Webhook } from "svix";
-import { upsertUser, deleteUser } from "@/lib/db/users";
+import {
+  deleteUser,
+  createUserFromClerk,
+  updateUserEmail,
+} from "@/lib/db/users";
 
 export async function POST(req: Request) {
   try {
@@ -32,9 +36,7 @@ export async function POST(req: Request) {
       console.error("Error verifying webhook:", err);
       return new Response(
         `Error verifying webhook: ${err?.message || "Unknown error"}`,
-        {
-          status: 400,
-        }
+        { status: 400 }
       );
     }
 
@@ -45,52 +47,37 @@ export async function POST(req: Request) {
         const email = email_addresses[0]?.email_address;
         const name = [first_name, last_name].filter(Boolean).join(" ");
 
-        if (email) {
-          try {
-            await upsertUser({
-              auth_id: id,
-              email,
-              name: name || "",
-              order_number: "",
-              serial_number: "",
-            });
-          } catch (err: any) {
-            console.error("Error upserting user:", err);
-            return new Response(
-              `Error upserting user: ${err?.message || "Unknown error"}`,
-              {
-                status: 500,
-              }
-            );
-          }
+        try {
+          await createUserFromClerk({
+            auth_id: id,
+            email: email || null,
+            name: name || null,
+          });
+        } catch (err: any) {
+          console.error("Error creating user:", err);
+          return new Response(
+            `Error creating user: ${err?.message || "Unknown error"}`,
+            { status: 500 }
+          );
         }
         break;
       }
 
       case "user.updated": {
-        const { id, email_addresses, first_name, last_name } = evt.data;
+        const { id, email_addresses } = evt.data;
         const email = email_addresses[0]?.email_address;
-        const name = [first_name, last_name].filter(Boolean).join(" ");
 
-        if (email) {
-          try {
-            await upsertUser({
-              auth_id: id,
-              email,
-              name: name || "",
-              order_number: "",
-              serial_number: "",
-              preserveFields: ["order_number", "serial_number"],
-            });
-          } catch (err: any) {
-            console.error("Error updating user:", err);
-            return new Response(
-              `Error updating user: ${err?.message || "Unknown error"}`,
-              {
-                status: 500,
-              }
-            );
-          }
+        try {
+          await updateUserEmail({
+            auth_id: id,
+            email: email || null,
+          });
+        } catch (err: any) {
+          console.error("Error updating user:", err);
+          return new Response(
+            `Error updating user: ${err?.message || "Unknown error"}`,
+            { status: 500 }
+          );
         }
         break;
       }
@@ -108,9 +95,7 @@ export async function POST(req: Request) {
           console.error("Error deleting user:", err);
           return new Response(
             `Error deleting user: ${err?.message || "Unknown error"}`,
-            {
-              status: 500,
-            }
+            { status: 500 }
           );
         }
         break;
