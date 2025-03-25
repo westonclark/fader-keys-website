@@ -15,7 +15,7 @@ export function HeroSection() {
           Fader Keys
         </h1>
         <p className="md:text-xl text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Control DAW faders using just your computer keyboard
+          A Virtual MIDI Fader Controller
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           {isSignedIn ? (

@@ -6,19 +6,19 @@ import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Fader Keys",
-  description: "Control your DAW faders with ease",
+  description: "A Virtual MIDI Fader Controller",
   icons: {
     icon: "/favicon.ico",
   },
   openGraph: {
     title: "Fader Keys",
-    description: "Control your DAW faders with ease",
+    description: "A Virtual MIDI Fader Controller",
     images: [
       {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Fader Keys - DAW Controller",
+        alt: "Fader Keys - Virtual MIDI Fader Controller",
       },
     ],
   },
